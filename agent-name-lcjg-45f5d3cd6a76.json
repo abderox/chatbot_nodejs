@@ -1,0 +1,13 @@
+{
+    "type": "service_account",
+    "project_id": "agent-name-lcjg",
+    "private_key_id": "45f5d3cd6a7693db08a2de88a8c3aa0c6fb67bb8",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDYfn99OmFTEXGA\nP6NCfOIl1O7aO+L5WMKwmGSLSrn6y1Z+6FipicbymJJjGKEl78QCdVnnMH89YZBv\n21pAEMxxj7Si/5HB/x320gLJ2Xp9K4GdyfNBSOrIsYTiR56B0ct1iAEqH+HB+qgG\nrmdrwGTD9lSpZuaUMLrl68oT3VBKBnfkuIKFSaRtUcKkL8wdMCRCaLGWV+7XyBvE\ntdEKCDzkbV6Qw3Mz76W9hssfDderNjAoLVQPa8fYpoLPjRkCAlrbd3adfg4fVKyx\n661/AG+Dz4no2b7SYeYOUdXCDaRjXTPuRtlMQAr/57hiV+IhQH13k7ujwwpL7clt\nDWp3WTPxAgMBAAECggEAC1AKYEhC/krJvRluMfbpwA91MvgIxW3p//15mQX8y4Yx\nMRDZ87N+bu4yLY2Tm6Jwkg6Q5eXUy0fAKvkpyVHbZgZ76l3Lj3kh1yQ8lzC3H+fs\nZirvrDJXyuiMTKDwj2DvplbG1U080DSlb7Jwtuqi9VK3lDHLZBRbCtFIMiMpGzIM\nUdwdAp1oydIENOy2+7k6lCmhA9F5nr7ZKuNmheiRQm8HfR3Fcmr1GyA2Ydn0Z9Cj\nBmZ2fmRJ1iVbWUCCQer70ZV37mlZIkXmqH+hQ2PT0unu7jipdj+iVD8to11yL+Oj\njJkp8ZKIYCTr8tFndSJIEA42xh0YiuP1+lX6W5iB4QKBgQD4MLosA9UV3umfHwwT\noWeFyMe2AFggAZdFmH9XDthncby1uG6sQipOddn//I/VyE9DZGAzUTTCD1vAi8/z\nqN30BhVOMYjV0bleNJmQjcXbD5fx20t01Ln1gJ228f7umWWuDEGQsfq+seq2Gxy8\nl8fom42Nn+/TBwnZ/OGrgZX5EQKBgQDfTnHyCa/E8jCmh+9GBV3gKy/bc0bXy5xa\nfjtLn+VhU6oLgT8gXTt5VWWGM7igyLPG6cSV+ROiAi8iCP4oafeaBWCf0oEXO+3s\noUPoram97dsDaV7JrXAOIK7+igGwjfA4ak82VetRFcPaO/RF73SAhRVJxCm7aER5\n3EvuiRSM4QKBgBxq9+YySiPG8lkV5PwabxASfUuJno2LoRaG7424VW8CxujHxWRT\n7yQsulllQdLorKq6w4kcsz3FJGxXlegAXemjCK17Xn+dE+yFeU/j69O5ZVx8D5fB\nA8nogCaCbv5C8jGLlbZLqrpLBOT1FcVCW9F2fi7JMVyoYahkHDLXE6UBAoGAJSdQ\nHg0uiX4iShLj5KqP6/RDiier6cuewA+wneyEpaTd7fwbHK9mbdGfiqygU2ARSU8r\nvigq9BGY9fi5ENBQufebE/xaLhtygqRyQAxk6Yzhm7e0ZanNswwNEZy0m0OCbGCD\nvW6eMGeGppDDG7+zio6Z9CQHLX8zpXLZz15PZQECgYByLgrRjxK/39daetfJEV9l\nuDQ8f4LUex6zEvAoteKcwmY3YgzCKPtC+KWjuZFpk7/dVjG2DX4XK4w/A5afyIN5\nMn3hDnW53ZFaFjU3mzBuk7wzzEyV1LKEiiayH15DJHnfKMU3QE+9p7d4SxT4tDeB\n2jrbcHHdEA6TIwlUKcDFhw==\n-----END PRIVATE KEY-----\n",
+    "client_email": "oracle-digital-assistant@agent-name-lcjg.iam.gserviceaccount.com",
+    "client_id": "101406368401628406190",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/oracle-digital-assistant%40agent-name-lcjg.iam.gserviceaccount.com"
+  }
+  
