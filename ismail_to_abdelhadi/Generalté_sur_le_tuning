@@ -1,0 +1,49 @@
+Optimizing SQL Code :
+- Using bind variables
+- Avoiding full table scans
+- Exploring index lookup
+- Exploring index skip-scan and index
+range-scan
+- Using subqueries
+
+
+
+
+
+Tuning Memory 
+
+Tuning memory to avoid Operating System paging  
+Tuning the Library Cache  
+Tuning the Shared Pool  
+Tuning the Program Global Area and the User Global Area  
+Tuning the Buffer Cache  
+
+
+Tuning I/O 
+
+Tuning at the disk level and strategies to distribute Oracle files  
+Striping objects across multiple disks  
+Choosing different RAID levels for different Oracle files  
+Using asynchronous I/O  
+Tuning checkpoints  
+Tuning redo logs   
+
+
+
+Tuning Contention  
+Introduction  
+Detecting and preventing lock contention  
+Investigating transactions and concurrency  
+Tuning latches  
+Tuning resources to minimize latch contention  
+Minimizing latches using bind variables  
+
+
+
+
+
+
+
+
+
+

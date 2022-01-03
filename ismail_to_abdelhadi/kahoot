@@ -1,0 +1,39 @@
+Among the following choices , which one is not a diagnostic tool ?
+ADDM
+OEM : Oracle enterprise manager   ---S7i7
+Alert log and trace files
+None of the above
+
+
+
+
+Oracle uses synchronous mode by default!
+--Answer : True
+
+
+
+Striping objects across multiple disks concerns what?
+
+-->  Tablespaces
+
+
+In which Oracle version, Automatic Workload Repository (AWR) was introduced ?
+
+---> 10g
+
+
+A value below __% of cache hit ratio indicates inefficient caching due to poor configuration.
+
+---> 80
+
+
+
+What is the best performing RAID level!
+
+---> RAID level 0 +1
+
+
+
+____ is used to store SQL statements and PL/SQL block?
+
+---> Library cache
