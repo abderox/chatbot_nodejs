@@ -23,7 +23,7 @@ app.post('/send-msg',(req,res)=>{
 var checkAndReturn= async (request)=>{
     var str =""+  request;
    
-    if(str.includes("SELECT"))
+    if(str.includes("SELECT") )
     {
      const v = await req.run(request);
       return v;

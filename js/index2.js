@@ -1,74 +1,7 @@
 var $messages = $('.messages-content');
 var serverResponse = "wala";
-particlesJS("particles-js", {"particles":{"number":{"value":80,"density":{"enable":true,"value_area":800}},"color":{"value":"#ffffff"},"shape":{"type":"circle","stroke":{"width":0,"color":"#000000"},"polygon":{"nb_sides":5},"image":{"src":"img/github.svg","width":100,"height":100}},"opacity":{"value":0.5,"random":false,"anim":{"enable":false,"speed":1,"opacity_min":0.1,"sync":false}},"size":{"value":3,"random":true,"anim":{"enable":false,"speed":40,"size_min":0.1,"sync":false}},"line_linked":{"enable":true,"distance":150,"color":"#ffffff","opacity":0.4,"width":1},"move":{"enable":true,"speed":6,"direction":"none","random":false,"straight":false,"out_mode":"out","bounce":false,"attract":{"enable":false,"rotateX":600,"rotateY":1200}}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":true,"mode":"repulse"},"onclick":{"enable":true,"mode":"push"},"resize":true},"modes":{"grab":{"distance":400,"line_linked":{"opacity":1}},"bubble":{"distance":400,"size":40,"duration":2,"opacity":8,"speed":3},"repulse":{"distance":200,"duration":0.4},"push":{"particles_nb":4},"remove":{"particles_nb":2}}},"retina_detect":true});var count_particles, stats, update; stats = new Stats; stats.setMode(0); stats.domElement.style.position = 'absolute'; stats.domElement.style.left = '0px'; stats.domElement.style.top = '0px'; document.body.appendChild(stats.domElement); count_particles = document.querySelector('.js-count-particles'); update = function() { stats.begin(); stats.end(); if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) { count_particles.innerText = window.pJSDom[0].pJS.particles.array.length; } requestAnimationFrame(update); }; requestAnimationFrame(update);;
-var options = { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric' };
-var today  = new Date();
-document.getElementById('time').innerHTML=today.toLocaleDateString("en-US", options);
-$(document).ready(function() {
-  
-  //Toggle fullscreen
-  $(".chat-bot-icon").click(function(e) {
-      $('.chat').removeClass('hide').addClass('show');
-      $('.chat').slideToggle(700);
-      $(this).children('img').toggleClass('hide');
-      $(this).children('svg').toggleClass('animate');
-  }); });
-  var siriWave = new SiriWave({
-    container: document.getElementById("siri-container"),
-    width: 600,
-    height: 200,
-    style: 'ios9',
-    curveDefinition: [
-      {
-        color: "255,255,255",
-        supportLine: true,
-      },
-      {
-        color: "153, 0, 4",
-      },
-      {
-        color: "89, 0, 179",
-      },
-      {
-        color: "255, 10, 155",
-      },
-      {
-        attenuation: -2,
-        lineWidth: 1,
-        opacity: 0.1,
-      },
-      {
-        attenuation: -6,
-        lineWidth: 1,
-        opacity: 0.2,
-      },
-      {
-        attenuation: 4,
-        lineWidth: 1,
-        opacity: 0.4,
-      },
-      {
-        attenuation: 2,
-        lineWidth: 1,
-        opacity: 0.6,
-      },
-      {
-        attenuation: 1,
-        lineWidth: 1.5,
-        opacity: 1,
-      }],
-    ratio: 1.5,
-    // animation speed
-    speed: 0.4,
-    // amplitude
-    amplitude: 2.3,
-    // frequency (iOS style only)
-    frequency: 6,
 
-  });
-  siriWave.stop();
-  $('#siri-container').hide("slow");
- 
+
 var suggession;
 //speech reco
 try {
@@ -78,16 +11,11 @@ var recognition = new SpeechRecognition();
 }
 catch(e) {
   console.error(e);
-  $('.no-browser-support').show("slow");
+  $('.no-browser-support').show();
 }
 
 $('#start-record-btn').on('click', function(e) {
   recognition.start();
-  $(document).ready(function() {
-  $('#siri-container').fadeIn("slow",function(){
-    siriWave.start();
-  });
-  });
 });
 
 recognition.onresult = (event) => {
@@ -98,11 +26,8 @@ recognition.onresult = (event) => {
   insertMessage()
 }
 recognition.onspeechend = function() {
+
   recognition.stop();
-  $('#siri-container').fadeOut( "slow", function() {
-    siriWave.stop();
-  });
- 
 }
 
 function listendom(no){
@@ -115,7 +40,7 @@ document.getElementById("MSG").value= no.innerHTML;
 $(window).load(function() {
   $messages.mCustomScrollbar();
   setTimeout(function() {
-    serverMessage("hello i am customer support bot type hi and i will show you quick buttions");
+    serverMessage("Hi there ! I am your bot assistant , greet me back to begin our chat !");
   }, 100);
 
 });
@@ -134,7 +59,7 @@ function insertMessage() {
   if ($.trim(msg) == '') {
     return false;
   }
-  $('<div class="message message-personal">' + msg + '</div>').appendTo($('.mCSB_container')).addClass('new');
+  $('<div class="message chat-bubble me">' + msg + '</div>').appendTo($('.mCSB_container')).addClass('new');
   fetchmsg() 
   
   $('.message-input').val(null);
@@ -154,13 +79,13 @@ function serverMessage(response2) {
   if ($('.message-input').val() != '') {
     return false;
   }
-  $('<div class="message loading new"><figure class="avatar"><img src="https://img.icons8.com/nolan/96/oracle-logo.png"/></figure><span></span></div>').appendTo($('.mCSB_container'));
+  $('<div class="message loading new"><figure class="avatar"><img src="css/bot.png" /></figure><span></span></div>').appendTo($('.mCSB_container'));
   updateScrollbar();
   
 
   setTimeout(function() {
     $('.message.loading').remove();
-    $('<div class="message new"><figure class="avatar"><img src="https://img.icons8.com/color/96/fa314a/bot.png"/></figure>' + response2 + '</div>').appendTo($('.mCSB_container')).addClass('new');
+    $('<div class="message new"><figure class="avatar"><img src="css/bot.png" /></figure>' + response2 + '</div>').appendTo($('.mCSB_container')).addClass('new');
     updateScrollbar();
   }, 100 + (Math.random() * 20) * 100);
 
