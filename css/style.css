@@ -21,8 +21,9 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-size: 12px;
   line-height: 1.3;
-  overflow: hidden;
-  background-image: url("https://images.pexels.com/photos/1563356/pexels-photo-1563356.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  background: rgba(0, 0, 0, 0.616);
+  overflow-x: hidden;
+  
 }
 .heading {
   position: absolute;
@@ -45,11 +46,11 @@ body {
 }
 .bg {
   width: 100%;
-  height: 100%;
+
   top: 0;
   left: 0;
   z-index: 1;
-  /* background: url("https://images.unsplash.com/photo-1451186859696-371d9477be93?crop=entropy&fit=crop&fm=jpg&h=975&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1925") no-repeat 0 0; */
+   background: url("https://images.unsplash.com/photo-1451186859696-371d9477be93?crop=entropy&fit=crop&fm=jpg&h=975&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1925") no-repeat 0 0; 
   -webkit-filter: blur(80px);
           filter: blur(80px);
   -webkit-transform: scale(1.2);
@@ -69,7 +70,7 @@ Chat
   width: 25%;
   height: 100vh;
   max-height: 700px;
-  z-index: 2;
+  z-index: 7;
   overflow: hidden;
   box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
   background: rgba(216, 216, 216, 0.5);
@@ -135,6 +136,12 @@ Messages
   overflow: hidden;
   position: relative;
   width: 100%;
+  background: rgba(255, 255, 255, 0);
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 4.5px );
+  -webkit-backdrop-filter: blur( 3.5px );
+  
+
 }
 .messages .messages-content {
   position: absolute;
@@ -155,6 +162,7 @@ Messages
   margin-left: 35px;
   position: relative;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.048);
+  box-shadow: #30303018 2px 2px 2px;
 }
 .messages .message .timestamp {
   position: absolute;
@@ -191,7 +199,8 @@ Messages
   float: right;
   color: rgb(0, 0, 0);
   text-align: right;
-  background: linear-gradient(120deg, #ffffff, #ffffff5d);
+  background: linear-gradient(120deg, #ffffff, #fcfcfc);
+  box-shadow: #30303015 2px 2px 2px;
   border-radius: 10px 10px 0 10px;
 }
 .messages .message.message-personal::before {
@@ -224,7 +233,7 @@ Messages
   width: 3px;
   height: 3px;
   border-radius: 50%;
-  background: rgba(160, 45, 45, 0.459);
+  background: rgba(255, 255, 255, 0.459);
   z-index: 2;
   margin-top: 4px;
   -webkit-animation: ball 0.45s cubic-bezier(0, 0, 0.15, 1) alternate infinite;
@@ -251,7 +260,7 @@ Messages
   width: 3px;
   height: 3px;
   border-radius: 50%;
-  background: rgba(153, 62, 62, 0.5);
+  background: rgba(255, 255, 255, 0.5);
   z-index: 2;
   margin-top: 4px;
   -webkit-animation: ball 0.45s cubic-bezier(0, 0, 0.15, 1) alternate infinite;
@@ -269,7 +278,7 @@ Messages
   width: 3px;
   height: 3px;
   border-radius: 50%;
-  background: rgba(143, 62, 62, 0.5);
+  background: rgba(255, 255, 255, 0.5);
   z-index: 2;
   margin-top: 4px;
   -webkit-animation: ball 0.45s cubic-bezier(0, 0, 0.15, 1) alternate infinite;
@@ -343,7 +352,8 @@ Custom Srollbar
 }
 
 .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
-  background-color: rgba(0, 0, 0, 0.5) !important;
+  background-color: rgba(0, 0, 0, 0.548) !important;
+  
 }
 
 /*--------------------
@@ -536,12 +546,12 @@ ul li{
 .chat-start {
   
   border: 1px solid #f8d4ff;
-  color: red;
+  color: rgb(87, 5, 5);
   width: 150px;
   border-radius: 50px;
   padding: 6px 10px;
   font-size: 13px;
-  font-weight: 200;
+  font-weight: 700;
   margin: 10px auto;
   text-align: center;
   margin-bottom: 15px;
@@ -554,7 +564,7 @@ ul li{
   height: 60px;
   width: 60px;
   background:#c72145b7;
-  z-index: 9999;
+  z-index: 6;
   border-radius: 30px;
   box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
   text-align: center;
@@ -862,11 +872,11 @@ input[type=password]:focus {
     background-color: #ffffff;
     outline: none;
 }
-.blur{
+.blur_{
   
   background: rgba(102, 102, 102, 0.247);
   backdrop-filter: blur(5px);
-  min-height: 1000vh;
+  min-height: 200vh;
   width: 1000vh;
   position: absolute;
   z-index: 100;
@@ -947,4 +957,106 @@ Credits
 .icon-credits a {
   text-decoration: none;
   color: rgba(255,255,255,0.2);
+}
+.container{
+ z-index: 2;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+}
+.card {
+  
+  background: linear-gradient(120deg, #e2e2e2, #a8a8a8,#ecbebe);;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+  margin: 10px 10px 10px 30px;
+  width: 60vh;
+  height: 50vh;
+  /* 1/3 minus the margins (20+20) */
+  padding: 10px;
+  text-align: center;
+  color: white;
+  float: left;
+}
+.small-card{
+  background: #e9e9e9;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+  margin: 10px 10px 10px 30px;
+  width: 60vh;
+  height: 5vh;
+  /* 1/3 minus the margins (20+20) */
+  padding: 10px;
+  text-align: center;
+  color: white;
+  float: left;
+  font-size: 15px;
+  font-weight: 700;
+ 
+ 
+  
+}
+
+@media (max-width: 768px) {
+  .card {
+      margin: 10px 20px;
+      width: calc(100% - 40px);
+  }
+  .small-card{
+    margin: 10px 20px;
+    width: calc(100% - 40px);
+  }
+  .card{
+      margin-top: 20px;
+  }
+}
+
+
+
+.card .title {
+  font-size: 25px;
+}
+
+.card .icon {
+  margin: 50px 0;
+}
+
+.card .icon svg {
+  width: 100px;
+  height: 100px;
+}
+
+.card .icon svg path {
+  fill: #f6b352;
+}
+
+.card .features ul {
+  padding: 0;
+  margin: 20px 0 50px 0;
+  list-style-type: none;
+}
+
+.card .features ul li {
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.card .features ul li span {
+  border-bottom: 2px dotted #f6b352;
+}
+
+.card .btn {
+  display: block;
+  background: #f6b352;
+  color: white;
+  padding: 15px 20px;
+  margin: 20px 0;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.9);
+  transition: all 200ms ease-in-out;
+  text-decoration: none;
+}
+
+.card .btn:hover {
+  background: #f68657;
 }

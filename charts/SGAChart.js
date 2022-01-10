@@ -62,28 +62,38 @@ const responses = [
     }
   ]
 
-  const myData = responses.map(response => response.VALUE)
 
+  export default function sgaChart(responses,ctx){
 
-  const labels = responses.map(response => response.NAME);
-  const class1 = responses.map(response => response.CLASS);
-const data = {
-  labels: labels,
-  
-  datasets: [{
-    label: 'PGA Chart',
-    data: myData,
-    fill: false,
-    borderColor: 'rgb(75, 192, 192)',
-    tension: 0.1,
-    options:{
-        plugins:{
-            tooltip:{
-                events:['hover'],
-                text:class1
+    
+      const myData = responses.map(response => response.VALUE)
+    
+    
+      const labels = responses.map(response => response.NAME);
+      const class1 = responses.map(response => response.CLASS);
+    const data = {
+      labels: labels,
+      
+      datasets: [{
+        label: 'PGA Chart',
+        data: myData,
+        fill: false,
+        borderColor: 'rgb(77, 226, 201)',
+        backgroundColor: 'rgb(77, 226, 201)',
+        tension: 0.1,
+        options:{
+            plugins:{
+                tooltip:{
+                    events:['hover'],
+                    text:class1
+                }
             }
         }
-    }
-  }]
-};
-
+      }]
+    };
+  
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: data
+    });
+  }

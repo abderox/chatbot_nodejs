@@ -25,7 +25,8 @@ var checkAndReturn= async (request)=>{
    
     if(str.includes("SELECT") )
     {
-     const v = await req.run(request);
+     const reqsplit = str.split('|')[0];
+     const v = await req.run(reqsplit);
       return v;
     }
     else {

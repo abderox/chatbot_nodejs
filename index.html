@@ -79,7 +79,8 @@
 </head>
 
 <body>
-  <div class="blur"></div>
+  
+  <div class="blur_"></div>
   <div class='box'>
     <div class='box-form'>
       <div class='box-login-tab'></div>
@@ -132,6 +133,72 @@
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x "><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
 </div>
 
+<div class="container hide">
+  <div class="small-card hide" id="instance_name" style="background:linear-gradient(120deg, #e66916, #cc0808);  color: rgb(255, 255, 255);"></div>
+  <div class="small-card hide" id="host_name" style="background:linear-gradient(120deg, #c74949, #bac936); color: rgb(255, 255, 255);"></div>
+  <div class="small-card hide" id="version" style="background: linear-gradient(120deg, #c76464, #fc7dcb);color: rgb(255, 255, 255);"></div>
+</div>
+<div class="container hide">
+  <div class="small-card hide" id="database_status" style="background: #8e1eb1;color: rgb(255, 255, 255);"></div>
+  <div class="small-card hide" id="" style="background: #1eb13e;color: rgb(255, 255, 255);"></div>
+  <div class="small-card hide" id="" style="background: #1e82b1;color: rgb(255, 255, 255);"></div>
+</div>
+
+<div class="container hide">
+  <div class="card hide">
+
+      <canvas height="50vh" width="60vh" style="height: 100%; width: 100%;" id="PGAChart"></canvas>
+
+
+  </div>
+  <!--/card hide-->
+
+  <div class="card hide">
+
+      <canvas height="50vh" width="60vh" style="height: 100%; width: 100%;" id="SGAChart"></canvas>
+
+
+  </div>
+  <!--/card hide-->
+
+  <div class="card hide" >
+
+     
+      <canvas height="50vh" width="60vh" height="50vh" width="60vh" style="height: 100%; width: 100%;" id="FileChart"></canvas>
+
+  </div>
+
+  </div>
+</div>
+<div class="container hide">
+  <div class="card hide">
+
+      <canvas height="50vh" width="60vh"  style="height: 100%; width: 100%;"   id="SysStatChart"></canvas>
+
+
+  </div>
+ 
+  <div class="card hide">
+
+      <div  style="position: relative; height:5vh; width:20vw; left: 15%;">
+          <canvas id="HitRatioChart"></canvas>
+      </div>
+
+  </div>
+  <!--/card hide-->
+
+
+  <!--/card hide-->
+
+  <div class="card hide ">
+
+     
+      <div
+  style="position: relative; height:5vh; width:20vw; left: 15%;">
+          <canvas id="HitRatioChartLibraryCash"></canvas>
+      </div>
+  </div>
+  </div>
   <div class="chat hide" id="body">
     <div class="chat-title">
       <h1>Beta-ODA</h1>

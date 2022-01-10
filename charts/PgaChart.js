@@ -1,5 +1,29 @@
+const responses = [
+    {
+      FILE_ID: 1,
+      PHYRDS: 9810,
+      PHYWRTS: 248,
+      READTIM: 5053,
+      WRITETIM: 5
+    },
+    {
+      FILE_ID: 2,
+      PHYRDS: 2309,
+      PHYWRTS: 2272,
+      READTIM: 741,
+      WRITETIM: 332
+    },
+    { FILE_ID: 3, PHYRDS: 32, PHYWRTS: 602, READTIM: 31, WRITETIM: 35 },
+    { FILE_ID: 4, PHYRDS: 8, PHYWRTS: 2, READTIM: 0, WRITETIM: 0 },
+    { FILE_ID: 5, PHYRDS: 20, PHYWRTS: 2, READTIM: 1, WRITETIM: 0 }
+  ]
+  
+  
 
-const chartBuildPga=(responses)=>{
+
+
+
+export default function chartBuildPga(responses,ctx){
 
     var row0 = responses.map(reponse => {
       return reponse.PHYRDS
@@ -21,7 +45,7 @@ const chartBuildPga=(responses)=>{
     
       const dataset = responses.map(reponse => {
       console.log(reponse)
-      return reponse.file_name
+      return reponse.FILE_ID
       
       })
       const myData = [{
@@ -39,7 +63,6 @@ const chartBuildPga=(responses)=>{
       label: dataset[2],
       backgroundColor: 'rgba(187, 78, 76, 1)',
       borderWidth: 2
-      }]
       }, 
       {
       data: row3,
@@ -47,11 +70,7 @@ const chartBuildPga=(responses)=>{
       backgroundColor: 'rgba(187, 178, 76, 1)',
       borderWidth: 2
       }]
-      
-      var modelBg = document.querySelector('.modal-bg')
-      
-          modelBg.classList.add('bg-active')
-          var ctx = document.getElementById('myChart').getContext('2d');
+  
           var myChart = new Chart(ctx, {
               type: 'bar',
               data: {
@@ -61,9 +80,9 @@ const chartBuildPga=(responses)=>{
           });
      
   }
-  export default chartBuildPga;
 
 
+/*
   const config = {
     type: 'line',
     data: data,
@@ -85,3 +104,4 @@ const chartBuildPga=(responses)=>{
       }
     }
   };
+    */

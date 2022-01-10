@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+  <title>ML chatbot</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+  <link rel='stylesheet'
+    href='https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.3/jquery.mCustomScrollbar.min.css'>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/fontawesome.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/siriwave/dist/siriwave.umd.min.js"></script>
+
+
+  <style>
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+
+    th,
+    td {
+      padding: 10px 20px;
+      border: 1px solid #000;
+    }
+    .isActive{
+        visibility: visible;
+    }
+    .isNotActive{
+        visibility: hidden;
+    }
+    .modal-bg {
+      
+    }
+    
+    .bg-active {
+        visibility: visible;
+        opacity: 1;
+    }
+    
+    .modal {
+        
+    }
+    
+    .modal canvas {
+    }
+
+  </style>
+</head>
+
+<body>
+
+
+  <div class="container hide">
+    <div class="card">
+
+        <canvas height="50vh" width="60vh" style="height: 100%; width: 100%;" id="PGAChart"></canvas>
+
+
+    </div>
+    <!--/card-->
+
+    <div class="card">
+
+        <canvas height="50vh" width="60vh" style="height: 100%; width: 100%;" id="SGAChart"></canvas>
+
+
+    </div>
+    <!--/card-->
+
+    <div class="card" >
+
+       
+        <canvas height="50vh" width="60vh" height="50vh" width="60vh" style="height: 100%; width: 100%;" id="FileChart"></canvas>
+
+    </div>
+
+    </div>
+</div>
+<div class="container hide">
+    <div class="card">
+
+        <canvas height="50vh" width="60vh"  style="height: 100%; width: 100%;"   id="SysStatChart"></canvas>
+
+
+    </div>
+   
+    <div class="card">
+
+        <div  style="position: relative; height:5vh; width:20vw; left: 20%;">
+            <canvas id="HitRatioChart"></canvas>
+        </div>
+
+    </div>
+    <!--/card-->
+
+
+    <!--/card-->
+
+    <div class="card ">
+
+       
+        <div
+    style="position: relative; height:5vh; width:20vw; left: 20%;">
+            <canvas id="HitRatioChartLibraryCash"></canvas>
+        </div>
+    </div>
+    </div>
+  <div class="blur_"></div>
+  <div class='box'>
+    <div class='box-form'>
+      <div class='box-login-tab'></div>
+      <div class='box-login-title'>
+        <div class='i i-login'></div><h3 style="margin-left: 4px !important; color:#000 !important">Oracle credentials</h>
+      </div>
+      <div class='box-login'>
+        <div class='fieldset-body' id='login_form'>
+          <button onclick="openLoginInfo();" class='b b-form i i-more' title='Mais Informações'></button>
+            <p class='field'>
+            <label for='user'>USERNAME</label>
+            <input type='text' id='user' name='user' title='Username' />
+            <span id='valida' class='i i-warning'></span>
+          </p>
+            <p class='field'>
+            <label for='pass'>PASSWORD</label>
+            <input type='password' id='pass' name='pass' title='Password' />
+            <span id='valida' class='i i-close'></span>
+          </p>
+          
+  
+            <label class='checkbox'>
+             
+  
+            <input type='button' id='do_login' value='GET STARTED' title='Get Started' />
+        </div>
+      </div>
+    </div>
+  </div> 
+  <div id="particles-js"></div> <!-- stats - count particles --> <div class="count-particles"> <span class="js-count-particles">--</span> particles </div> <!-- particles.js lib - https://github.com/VincentGarreau/particles.js --> <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> <!-- stats.js lib --> <script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
+  <div id="particls-js">
+    <div class="heading">
+      <h1>Oracle Digital Assistant β</h1>
+      <h3>
+         This mini - project is made with proud 🤖 and love ❤️ !
+      </h3>
+      <h3>
+        Accomplished by both Abdelhadi Mouzafir & Ismail Errouk !
+     </h3>
+     <h3>
+      Supervised by Our Prof Mrs Bouzaachane Khadija .
+   </h3>
+   <input type='button'style="width:200px !important;" id='dash' value='Go To Dashboard' title='Get Started' />
+  </div>
+  </div>
+  <div class="count-particles"> <span class="js-count-particles"></span>  </div> 
+  <div class="chat-bot-icon">
+        
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square animate"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x "><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+</div>
+
+  <div class="chat hide" id="body">
+    <div class="chat-title">
+      <h1>Beta-ODA</h1>
+      <h2>  Let’s chat? - We're online</h2>
+
+
+      <figure class="avatar">
+        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+width="40" height="40"
+viewBox="0 0 172 172"
+style=" fill:#ffffff;"><defs><linearGradient x1="10.98113" y1="146.47144" x2="137.95475" y2="19.49781" gradientUnits="userSpaceOnUse" id="color-1_jQhWk5R601OC_gr1"><stop offset="0" stop-color="#c72828"></stop><stop offset="1" stop-color="#b500c9"></stop></linearGradient></defs><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="url(#color-1_jQhWk5R601OC_gr1)"><path d="M129,69.875c0,-1.48427 1.20323,-2.6875 2.6875,-2.6875h5.375v-5.375c0,-1.48427 1.20323,-2.6875 2.6875,-2.6875c1.48427,0 2.6875,1.20323 2.6875,2.6875v8.0625c0,1.48427 -1.20323,2.6875 -2.6875,2.6875h-8.0625c-1.48427,0 -2.6875,-1.20323 -2.6875,-2.6875zM57.71138,51.0625c0,-5.93706 4.81294,-10.75 10.75,-10.75c5.93706,0 10.75,4.81294 10.75,10.75c0,5.93706 -4.81294,10.75 -10.75,10.75c-5.93706,0 -10.75,-4.81294 -10.75,-10.75zM63.08638,51.0625c0,2.96853 2.40647,5.375 5.375,5.375c2.96853,0 5.375,-2.40647 5.375,-5.375c0,-2.96853 -2.40647,-5.375 -5.375,-5.375c-2.96853,0 -5.375,2.40647 -5.375,5.375zM5.76469,56.21444c-1.14676,-4.11923 1.12167,-8.4173 5.16955,-9.7949c4.04788,-1.37761 8.46722,0.64443 10.07127,4.60803l25.96663,-0.40044c0,-0.19888 0,-0.40044 0.01613,-0.59663l-8.52475,-7.0305c-0.7841,-0.65316 -1.12553,-1.69726 -0.87881,-2.6875h-16.08469c-1.48427,0 -2.6875,-1.20323 -2.6875,-2.6875v-11.2445c-3.70216,-1.30891 -5.92291,-5.0946 -5.25889,-8.96478c0.66402,-3.87018 4.01966,-6.69912 7.94639,-6.69912c3.92673,0 7.28237,2.82894 7.94639,6.69912c0.66402,3.87018 -1.55673,7.65587 -5.25889,8.96478v8.557h16.125c0.06987,0 0.12631,0.03494 0.19619,0.04031l2.709,-4.69506c0.65729,-1.1375 2.04061,-1.63308 3.27069,-1.17175l10.35494,3.87806c0.58319,-0.37894 1.17713,-0.72294 1.77644,-1.03738l1.81406,-10.89244c0.21561,-1.29691 1.33785,-2.24746 2.65256,-2.24675h4.10112v-10.75c0,-1.48427 1.20323,-2.6875 2.6875,-2.6875h26.875c1.48427,0 2.6875,1.20323 2.6875,2.6875v5.375h18.19706l1.118,-1.56144c0.76776,-1.07557 2.20354,-1.43337 3.38625,-0.84388l7.79375,3.90225c15.93959,7.89863 26.00112,24.17343 25.94244,41.96263c0.01409,4.93362 -1.71866,9.71296 -4.89125,13.49125l8.35544,18.8125c0.73508,1.66195 0.58062,3.58279 -0.41058,5.10592c-0.9912,1.52313 -2.68491,2.44229 -4.50217,2.44326h-3.92644v8.0625c-0.00279,0.7135 -0.28668,1.39715 -0.79012,1.90275l-4.58488,4.58488v15.01237c0,1.48427 -1.20323,2.6875 -2.6875,2.6875h-16.125c-1.88125,0 -8.0195,-3.15244 -18.17019,-9.27725l-6.01731,10.02169v14.26794l18.02506,18.02506c0.76838,0.76861 0.9982,1.92435 0.58232,2.92845c-0.41587,1.0041 -1.39557,1.65888 -2.48238,1.65912h-86c-1.08681,-0.00023 -2.06651,-0.65502 -2.48238,-1.65912c-0.41587,-1.0041 -0.18606,-2.15984 0.58232,-2.92845l23.40006,-23.40006v-39.19987c0,-1.48427 1.20323,-2.6875 2.6875,-2.6875h8.0625v-13.4375h-1.41362c-1.31385,0.00093 -2.43578,-0.94822 -2.65256,-2.24406l-1.81406,-10.89513c-0.59931,-0.31444 -1.19325,-0.65844 -1.77644,-1.03737l-8.6,3.225l0.13169,13.61488c0.00645,0.71695 -0.27384,1.40676 -0.77855,1.916c-0.50471,0.50925 -1.19197,0.79571 -1.90895,0.79568h-16.125c-0.15769,-0.01604 -0.31341,-0.04755 -0.46494,-0.09406c-1.26915,3.73585 -5.05553,6.0044 -8.9483,5.36122c-3.89277,-0.64318 -6.7482,-4.00911 -6.7482,-7.95465c0,-3.94555 2.85543,-7.31148 6.7482,-7.95465c3.89277,-0.64318 7.67915,1.62536 8.9483,5.36122c0.15152,-0.04651 0.30725,-0.07802 0.46494,-0.09406h13.41331l-0.11019,-12.09375l-5.02294,-8.69675c-0.64418,-1.13306 -0.38248,-2.56502 0.62081,-3.397l3.68725,-3.03687l-21.1345,0.32787c-1.13727,3.26647 -4.23598,5.4397 -7.69449,5.39643c-3.45851,-0.04327 -6.50188,-2.29335 -7.55707,-5.58724zM24.1875,86c0,-1.48427 -1.20323,-2.6875 -2.6875,-2.6875c-1.48427,0 -2.6875,1.20323 -2.6875,2.6875c0,1.48427 1.20323,2.6875 2.6875,2.6875c1.48427,0 2.6875,-1.20323 2.6875,-2.6875zM18.8125,18.8125c0,1.48427 1.20323,2.6875 2.6875,2.6875c1.48427,0 2.6875,-1.20323 2.6875,-2.6875c0,-1.48427 -1.20323,-2.6875 -2.6875,-2.6875c-1.48427,0 -2.6875,1.20323 -2.6875,2.6875zM69.875,96.75h29.5625v-5.375c-0.0004,-1.0997 0.66922,-2.0887 1.69044,-2.49669l7.19713,-2.87831h-6.20006v-5.375h10.75v-4.48006l-4.79181,-6.38819c-0.18899,0.06252 -0.38477,0.10222 -0.58319,0.11825h-12.66081l-1.13681,1.96725c-0.65729,1.1375 -2.04061,1.63308 -3.27069,1.17175l-10.34419,-3.87806c-0.58319,0.37894 -1.17713,0.72563 -1.77375,1.03738l-1.81675,10.89512c-0.21662,1.29484 -1.33704,2.24368 -2.64987,2.24406h-3.97213zM98.45925,43l-6.51719,5.375h12.87044v-10.75h-6.86925l1.13412,1.96725c0.65093,1.13494 0.38995,2.57373 -0.61812,3.40775zM91.94206,53.75l6.51719,5.375c1.0138,0.83531 1.27522,2.28107 0.61812,3.4185l-1.13412,1.9565h6.86925v-10.75zM86,118.25v-16.125h-5.375v29.5625h16.125v-1.57487l-9.96256,-9.96256c-0.50404,-0.50389 -0.78729,-1.18735 -0.78744,-1.90006zM65.0375,161.25h20.9625v-24.1875h-5.375v5.375c0.00064,0.65129 -0.23525,1.28064 -0.66381,1.77106l-10.08619,11.52669v0.13975h-0.12363zM57.89413,161.25l6.60588,-7.525v-19.35h5.375v13.19562l5.375,-6.14362v-39.302h-16.125v37.625c-0.00015,0.71271 -0.2834,1.39618 -0.78744,1.90006l-19.59994,19.59994zM97.52669,147.02506c-0.5001,-0.50564 -0.77939,-1.18889 -0.77669,-1.90006v-8.0625h-5.375v24.1875h20.38737zM103.544,116.92506c-0.946,-0.58319 -1.85169,-1.13681 -2.85412,-1.76569c-0.78329,-0.4947 -1.25655,-1.35796 -1.25238,-2.28438v-10.75h-8.0625v15.01237l7.525,7.525zM110.1875,33.11v30.49506l7.525,10.03244c0.3489,0.4652 0.5375,1.03101 0.5375,1.6125v10.75c0.0004,1.0997 -0.66922,2.0887 -1.69044,2.49669l-11.74706,4.69775v18.189c1.25238,0.77669 2.52088,1.55606 3.78669,2.32469h0.01613l0.01344,0.01344c5.73477,3.73049 11.72985,7.04463 17.93906,9.91687l13.18219,-0.01344v-13.4375c0.00015,-0.71271 0.2834,-1.39618 0.78744,-1.90006l1.03737,-1.03738c-4.46568,-0.64252 -8.6021,-2.71733 -11.78737,-5.9125c-1.01849,-1.05452 -1.00392,-2.73073 0.03274,-3.76739c1.03666,-1.03666 2.71287,-1.05123 3.76739,-0.03274c2.93074,2.94717 6.91888,4.59914 11.07519,4.58756h0.46225v-8.0625c0,-1.48427 1.20323,-2.6875 2.6875,-2.6875h6.61394l-9.07031,-20.40888c-0.45112,-1.01615 -0.22998,-2.20518 0.55631,-2.99119c2.94733,-2.93173 4.59926,-6.92075 4.58756,-11.07787c0.05342,-15.7499 -8.85316,-30.1599 -22.96469,-37.15469l-5.74587,-2.87562zM72.5625,18.8125h1.27388c1.31284,0.00039 2.43326,0.94922 2.64987,2.24406l1.81675,10.89513c0.59663,0.31175 1.19056,0.65844 1.77375,1.03737l10.35494,-3.87806c1.23008,-0.46133 2.6134,0.03425 3.27069,1.17175l1.13681,1.96725h9.97331c-0.00038,-0.5603 0.17544,-1.10654 0.50256,-1.56144l8.48175,-11.87606h-17.04681c-1.48427,0 -2.6875,-1.20323 -2.6875,-2.6875v-5.375h-21.5zM51.49788,46.77863c0.70802,0.58193 1.07069,1.48454 0.96213,2.39456c-0.16483,1.25415 -0.16483,2.52448 0,3.77862c0,0.06181 0,0.12362 0,0.18544c0,0.06181 0.01881,0.05912 0.01881,0.09137c-0.00456,0.03896 -0.01175,0.07757 -0.0215,0.11556c-0.00097,0.3169 -0.05924,0.63102 -0.172,0.92719l-0.01613,0.02956c-0.11823,0.27278 -0.28179,0.52358 -0.48375,0.74175c-0.04648,0.05454 -0.09582,0.10657 -0.14781,0.15587c-0.04287,0.05181 -0.08863,0.10116 -0.13706,0.14781l-7.86363,6.46613l3.09869,5.375l9.54331,-3.57706c0.85649,-0.32094 1.81742,-0.18425 2.55044,0.36281c1.01102,0.76302 2.1089,1.40353 3.27069,1.90812c0.84135,0.36118 1.44093,1.12585 1.591,2.02906l1.66894,10.02706h6.20006l1.67162,-10.02975c0.15007,-0.90321 0.74965,-1.66788 1.591,-2.02906c1.16109,-0.50596 2.25882,-1.14638 3.27069,-1.90812c0.73238,-0.54611 1.69204,-0.68277 2.54775,-0.36281l9.546,3.57975l3.096,-5.375l-7.86094,-6.46881c-0.70702,-0.5825 -1.06864,-1.48502 -0.95944,-2.39456c0.16483,-1.25415 0.16483,-2.52448 0,-3.77862c-0.1092,-0.90954 0.25242,-1.81206 0.95944,-2.39456l7.86094,-6.46344l-3.096,-5.375l-9.546,3.57706c-0.85571,0.31996 -1.81537,0.1833 -2.54775,-0.36281c-1.01186,-0.76175 -2.1096,-1.40217 -3.27069,-1.90812c-0.84135,-0.36118 -1.44093,-1.12585 -1.591,-2.02906l-1.67163,-10.02706h-6.19737l-1.66894,10.02975c-0.15007,0.90321 -0.74965,1.66788 -1.591,2.02906c-1.16178,0.5046 -2.25967,1.14511 -3.27069,1.90812c-0.73302,0.54706 -1.69394,0.68376 -2.55044,0.36281l-9.546,-3.57975l-3.09869,5.375zM10.88169,54.57237v0c0.45422,1.41299 1.96786,2.19026 3.38087,1.73613c0.96913,-0.24685 1.72104,-1.01142 1.95169,-1.98454c0.23064,-0.97312 -0.09813,-1.99382 -0.85338,-2.64938c-0.75525,-0.65556 -1.81204,-0.83753 -2.74306,-0.47233c-1.41299,0.45422 -2.19026,1.96786 -1.73612,3.38087zM69.875,112.875h-5.375v5.375h5.375zM69.875,123.625h-5.375v5.375h5.375zM86,80.625h-5.375v5.375h5.375zM96.75,80.625h-5.375v5.375h5.375zM120.9375,32.25h-5.375v10.75h5.375zM120.9375,48.375h-5.375v5.375h5.375zM120.9375,59.125h-5.375v5.375h5.375z"></path></g></g></svg>
+    
+      </figure>
+    </div>
+    <div class="messages">
+     
+
+      <div class="messages-content">
+        <div class="chat-start" id="time"></div>
+      </div>
+      <div class="suggession">
+
+      </div>
+    </div>
+    <div id="siri-container"></div>
+    <form class="message-box" id="mymsg" method="POST">
+        
+      <input type="text" id="MSG" name="msgg" class="message-input" placeholder="Type message...">
+
+      <i class="fas fa-microphone" id="start-record-btn"></i>
+      
+      <button type="submit" class="message-submit"><i class="fas fa-paper-plane"></i></button>
+    </form>
+    <h3 class="no-browser-support" hidden>Sorry, Your Browser Doesn't Support the Web Speech API. Try Opening This Demo
+      In Google Chrome.</h3>
+    <div class="modal-bg">
+      <div class="modal" height="800px" width="800px">
+        <canvas style="height: 100%;" id="myChart"></canvas>
+      </div>
+    </div>
+    <!-- <div id="siri-container"></div> -->
+
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.3/particles.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </div>
+  <div class="bg"></div>
+
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  
+  <script
+    src='https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.3/jquery.mCustomScrollbar.concat.min.js'></script>
+    <script src="js/index.js"></script>
+    
+ 
+
+
+</body>
+
+</html>
+
+

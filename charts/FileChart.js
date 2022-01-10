@@ -1,92 +1,97 @@
-const responses = [
-    {
-      FILE#: 1,
-      PHYRDS: 9810,
-      PHYWRTS: 248,
-      READTIM: 5053,
-      WRITETIM: 5
-    },
-    {
-      FILE#: 2,
-      PHYRDS: 2309,
-      PHYWRTS: 2272,
-      READTIM: 741,
-      WRITETIM: 332
-    },
-    { 'FILE#': 3, PHYRDS: 32, PHYWRTS: 602, READTIM: 31, WRITETIM: 35 },
-    { 'FILE#': 4, PHYRDS: 8, PHYWRTS: 2, READTIM: 0, WRITETIM: 0 },
-    { 'FILE#': 5, PHYRDS: 20, PHYWRTS: 2, READTIM: 1, WRITETIM: 0 }
-  ]
-  [
-    {
-      'FILE#': 1,
-      PHYRDS: 9810,
-      PHYWRTS: 248,
-      READTIM: 5053,
-      WRITETIM: 5
-    },
-    {
-      'FILE#': 2,
-      PHYRDS: 2309,
-      PHYWRTS: 2272,
-      READTIM: 741,
-      WRITETIM: 332
-    },
-    { 'FILE#': 3, PHYRDS: 32, PHYWRTS: 602, READTIM: 31, WRITETIM: 35 },
-    { 'FILE#': 4, PHYRDS: 8, PHYWRTS: 2, READTIM: 0, WRITETIM: 0 },
-    { 'FILE#': 5, PHYRDS: 20, PHYWRTS: 2, READTIM: 1, WRITETIM: 0 }
-  ]
+const responses = [{
+  COMPONENT: 'shared pool',
+  CURRENT_SIZE: 452984832,
+  MIN_SIZE: 452984832,
+  MAX_SIZE: 452984832
+},
+{
+  COMPONENT: 'large pool',
+  CURRENT_SIZE: 16777216,
+  MIN_SIZE: 16777216,
+  MAX_SIZE: 16777216
+},
+{
+  COMPONENT: 'java pool',
+  CURRENT_SIZE: 16777216,
+  MIN_SIZE: 16777216,
+  MAX_SIZE: 16777216
+},
+{
+  COMPONENT: 'SGA Target',
+  CURRENT_SIZE: 1409286144,
+  MIN_SIZE: 1409286144,
+  MAX_SIZE: 1409286144
+},
+{
+  COMPONENT: 'DEFAULT buffer cache',
+  CURRENT_SIZE: 889192448,
+  MIN_SIZE: 889192448,
+  MAX_SIZE: 889192448
+},
+{
+  COMPONENT: 'PGA Target',
+  CURRENT_SIZE: 956301312,
+  MIN_SIZE: 956301312,
+  MAX_SIZE: 956301312
+}
+]
+
+
+function random_rgba() {
+var o = Math.round,
+  r = Math.random,
+  s = 255;
+let color = 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + 0.5 + ')';
+return color;
+}
+export default function fileChart(responses,ctx){
+
   
-      'FILE#': 1,
-      PHYRDS: 9810,
-      PHYWRTS: 248,
-      READTIM: 5053,
-      WRITETIM: 5
-    },
-    {
-      'FILE#': 2,
-      PHYRDS: 2309,
-      PHYWRTS: 2272,
-      READTIM: 741,
-      WRITETIM: 332
-    },
-    { 'FILE#': 3, PHYRDS: 32, PHYWRTS: 602, READTIM: 31, WRITETIM: 35 },
-    { 'FILE#': 4, PHYRDS: 8, PHYWRTS: 2, READTIM: 0, WRITETIM: 0 },
-    { 'FILE#': 5, PHYRDS: 20, PHYWRTS: 2, READTIM: 1, WRITETIM: 0 }
-  ]
+  var row0 = responses.map(reponse => {
+  return reponse.CURRENT_SIZE
+  })
   
-      'FILE#': 1,
-      PHYRDS: 9810,
-      PHYWRTS: 248,
-      READTIM: 5053,
-      WRITETIM: 5
-    },
-    {
-      'FILE#': 2,
-      PHYRDS: 2309,
-      PHYWRTS: 2272,
-      READTIM: 741,
-      WRITETIM: 332
-    },
-    { 'FILE#': 3, PHYRDS: 32, PHYWRTS: 602, READTIM: 31, WRITETIM: 35 },
-    { 'FILE#': 4, PHYRDS: 8, PHYWRTS: 2, READTIM: 0, WRITETIM: 0 },
-    { 'FILE#': 5, PHYRDS: 20, PHYWRTS: 2, READTIM: 1, WRITETIM: 0 }
-  ]
-      'FILE#': 1,
-      PHYRDS: 9810,
-      PHYWRTS: 248,
-      READTIM: 5053,
-      WRITETIM: 5
-    },
-    {
-      'FILE#': 2,
-      PHYRDS: 2309,
-      PHYWRTS: 2272,
-      READTIM: 741,
-      WRITETIM: 332
-    },
-    { 'FILE#': 3, PHYRDS: 32, PHYWRTS: 602, READTIM: 31, WRITETIM: 35 },
-    { 'FILE#': 4, PHYRDS: 8, PHYWRTS: 2, READTIM: 0, WRITETIM: 0 },
-    { 'FILE#': 5, PHYRDS: 20, PHYWRTS: 2, READTIM: 1, WRITETIM: 0 }
-  ]
+  var row1 = responses.map(reponse => {
+  return reponse.MIN_SIZE
+  })
   
+  var row2 = responses.map(reponse => {
+  return reponse.MAX_SIZE
+  })
+  
+  var obj = {};
+  var dt = [];
+  var backgroundColor = {};
+  var label = {}
+  
+  
+  
+  const dataset = responses.map(reponse => {
+  console.log(reponse)
+  return reponse.COMPONENT
+  })
+  
+  const myData = [{
+  data: row0,
+  label: dataset[0],
+  backgroundColor: 'rgba(64, 194, 147, 0.77)',
+  borderWidth: 2
+  }, {
+  data: row1,
+  label: dataset[1],
+  backgroundColor: 'rgba(240, 148, 1, 1)',
+  borderWidth: 2
+  }, {
+  data: row2,
+  label: dataset[2],
+  backgroundColor: 'rgba(187, 78, 76, 1)',
+  borderWidth: 2
+  }]
+      var myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+              labels: dataset,
+              datasets: myData
+          },
+      });
+}

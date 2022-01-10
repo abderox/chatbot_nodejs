@@ -1,8 +1,13 @@
+
+
 var $messages = $('.messages-content');
 var serverResponse = "wala";
 $("#dash").click(function() {
   $('#particles-js').addClass('hide_blur');
-  $('#particls-js').slideUp(500);
+  $('#particls-js').slideUp(200);
+  $('.container').removeClass('hide');
+  $('.card').removeClass('hide');
+  $('.small-card').removeClass('hide');
 });
 particlesJS("particles-js", {"particles":{"number":{"value":80,"density":{"enable":true,"value_area":800}},"color":{"value":"#ffffff"},"shape":{"type":"circle","stroke":{"width":0,"color":"#000000"},"polygon":{"nb_sides":5},"image":{"src":"img/github.svg","width":100,"height":100}},"opacity":{"value":0.5,"random":false,"anim":{"enable":false,"speed":1,"opacity_min":0.1,"sync":false}},"size":{"value":3,"random":true,"anim":{"enable":false,"speed":40,"size_min":0.1,"sync":false}},"line_linked":{"enable":true,"distance":150,"color":"#ffffff","opacity":0.4,"width":1},"move":{"enable":true,"speed":6,"direction":"none","random":false,"straight":false,"out_mode":"out","bounce":false,"attract":{"enable":false,"rotateX":600,"rotateY":1200}}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":true,"mode":"repulse"},"onclick":{"enable":true,"mode":"push"},"resize":true},"modes":{"grab":{"distance":400,"line_linked":{"opacity":1}},"bubble":{"distance":400,"size":40,"duration":2,"opacity":8,"speed":3},"repulse":{"distance":200,"duration":0.4},"push":{"particles_nb":4},"remove":{"particles_nb":2}}},"retina_detect":true});var count_particles, stats, update; stats = new Stats; stats.setMode(0); stats.domElement.style.position = 'absolute'; stats.domElement.style.left = '0px'; stats.domElement.style.top = '0px'; document.body.appendChild(stats.domElement); count_particles = document.querySelector('.js-count-particles'); update = function() { stats.begin(); stats.end(); if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) { count_particles.innerText = window.pJSDom[0].pJS.particles.array.length; } requestAnimationFrame(update); }; requestAnimationFrame(update);;
 var options = { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric' };
@@ -33,7 +38,7 @@ $(document).ready(function() {
   
           if(name === password  && name=== 'sys'){
           
-        $('.blur').addClass('hide_blur');
+        $('.blur_').addClass('hide_blur');
         $('.box').hide();
          $(this).parent().find('span').addClass("i-save");
          $(this).parent().find('span').css("display","block");
@@ -230,12 +235,58 @@ function fetchmsg(){
         }).then(res => res.json())
          .then(response => {
           console.log(response.reply[1]);
+          
+          
+         
           // tableCreate()
           // creationTable()
           // buildSgaChart();
           response.reply[0].map(content =>{
-            serverMessage(content.text.text[0]);
-            speechSynthesis.speak( new SpeechSynthesisUtterance(content.text.text[0]))
+            if(content.text.text[0].includes("SELECT") )
+         {
+          const indice = content.text.text[0].split('|')[1];
+          const indice_int = parseInt(indice);
+          switch(indice_int){
+            case 3 : {
+              chartBuildPga(response.reply[1],ctxPga);
+              break;
+            }
+            case 0 : {
+              sgaChart(response.reply[1],ctxSGA);
+              break;
+            }
+            case 8 : {
+              fileChart(response.reply[1],ctxFileChart)
+              console.log(response.reply[1])
+          
+              break;
+            }
+            case 5 : {
+              setCredentials(response.reply[1][0])
+              console.log(response.reply[1][0].INSTANCE_NAME)
+          
+              break;
+            }
+                  case 9 : {
+              sysStatChart(response.reply[1],ctxSysStat)
+              console.log(response.reply[1])
+          
+              break;
+            }
+            case 1 : {
+              ratioChartLibraryCash(response.reply[1][0].Hit_Rate,ctxHitRatioChartLibraryCash)
+              console.log(response.reply[1][0].Hit_Rate)
+              break;
+            }
+            case 6 : {
+              ratioChart(response.reply[1][0].Hit_Rate,ctxHitRatio)
+              console.log(response.reply[1][0].Hit_Rate)
+              break;
+            }
+          }
+          }
+            serverMessage(content.text.text[0].split('|')[0]);
+            speechSynthesis.speak( new SpeechSynthesisUtterance(content.text.text[0].split('|')[0]))
           });
         
           
@@ -244,515 +295,17 @@ function fetchmsg(){
           .catch(error => console.error('Error h:', error));
 
 }
-// const responses = [{
-//   COMPONENT: 'shared pool',
-//   CURRENT_SIZE: 452984832,
-//   MIN_SIZE: 452984832,
-//   MAX_SIZE: 452984832
-// },
-// {
-//   COMPONENT: 'large pool',
-//   CURRENT_SIZE: 16777216,
-//   MIN_SIZE: 16777216,
-//   MAX_SIZE: 16777216
-// },
-// {
-//   COMPONENT: 'java pool',
-//   CURRENT_SIZE: 16777216,
-//   MIN_SIZE: 16777216,
-//   MAX_SIZE: 16777216
-// },
-// {
-//   COMPONENT: 'SGA Target',
-//   CURRENT_SIZE: 1409286144,
-//   MIN_SIZE: 1409286144,
-//   MAX_SIZE: 1409286144
-// },
-// {
-//   COMPONENT: 'DEFAULT buffer cache',
-//   CURRENT_SIZE: 889192448,
-//   MIN_SIZE: 889192448,
-//   MAX_SIZE: 889192448
-// },
-// {
-//   COMPONENT: 'PGA Target',
-//   CURRENT_SIZE: 956301312,
-//   MIN_SIZE: 956301312,
-//   MAX_SIZE: 956301312
-// }
-// ]
-
-
-// function random_rgba() {
-// var o = Math.round,
-//   r = Math.random,
-//   s = 255;
-// let color = 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + 0.5 + ')';
-// return color;
-// }
-// var row0 = responses.map(reponse => {
-// return reponse.CURRENT_SIZE
-// })
-
-// var row1 = responses.map(reponse => {
-// return reponse.MIN_SIZE
-// })
-
-// var row2 = responses.map(reponse => {
-// return reponse.MAX_SIZE
-// })
-
-// var obj = {};
-// var dt = [];
-// var backgroundColor = {};
-// var label = {}
 
 
 
-// const dataset = responses.map(reponse => {
-// console.log(reponse)
-// return reponse.COMPONENT
-
-// })
-// const myData = [{
-// data: row0,
-// label: dataset[0],
-// backgroundColor: 'rgba(64, 194, 147, 0.77)',
-// borderWidth: 2
-// }, {
-// data: row1,
-// label: dataset[1],
-// backgroundColor: 'rgba(240, 148, 1, 1)',
-// borderWidth: 2
-// }, {
-// data: row2,
-// label: dataset[2],
-// backgroundColor: 'rgba(187, 78, 76, 1)',
-// borderWidth: 2
-// }]
-// var modelBtn = document.querySelector('.modal-btn')
-// var modelBg = document.querySelector('.modal-bg')
-// modelBtn.addEventListener('click', function() {
-//     modelBg.classList.add('bg-active')
-//     var ctx = document.getElementById('myChart').getContext('2d');
-//     var myChart = new Chart(ctx, {
-//         type: 'bar',
-//         data: {
-//             labels: dataset,
-//             datasets: myData
-//         },
-//     });
-// })
-
-// const ratioChart = ()=>{
-// const data = {
-//   labels: [
-//     'HIT RATIO',
-//     'Free'
-//   ],
-//   datasets: [{
-//     labels:["used","free"],
-//     data: [97,100-97 ],
-//     backgroundColor: [
-//       'rgb(255, 99, 132)',
-//       'rgb(54, 162, 235)'
-//     ],
-//     hoverOffset: 4
-//   }]
-// };
-// var modelBg = document.querySelector('.modal-bg')
-//     modelBg.classList.add('bg-active')
-//     var ctx = document.getElementById('myChart').getContext('2d');
-//       var myChart = new Chart(ctx, {
-  
-//               type: 'doughnut',
-//               data: data,
-            
-//       });
-//       this.chart.ctx.fillText()
-    
-
-// }
-
-// const chartBuild=(responses)=>{
-
-//   var row0 = responses.map(reponse => {
-//     return reponse.CURRENT_SIZE
-//     })
-    
-//     var row1 = responses.map(reponse => {
-//     return reponse.MIN_SIZE
-//     })
-    
-//     var row2 = responses.map(reponse => {
-//     return reponse.MAX_SIZE
-//     })
-    
-  
-//     const dataset = responses.map(reponse => {
-//     console.log(reponse)
-//     return reponse.COMPONENT
-    
-//     })
-//     const myData = [{
-//     data: row0,
-//     label: dataset[0],
-//     backgroundColor: 'rgba(64, 194, 147, 0.77)',
-//     borderWidth: 2
-//     }, {
-//     data: row1,
-//     label: dataset[1],
-//     backgroundColor: 'rgba(240, 148, 1, 1)',
-//     borderWidth: 2
-//     }, {
-//     data: row2,
-//     label: dataset[2],
-//     backgroundColor: 'rgba(187, 78, 76, 1)',
-//     borderWidth: 2
-//     }]
-    
-//     var modelBg = document.querySelector('.modal-bg')
-    
-//         modelBg.classList.add('bg-active')
-//         var ctx = document.getElementById('myChart').getContext('2d');
-//         var myChart = new Chart(ctx, {
-//             type: 'bar',
-//             data: {
-//                 labels: dataset,
-//                 datasets: myData
-//             },
-//         });
-   
-// }
-
-// const responses =[
-//   {
-//     file_name: "1",
-//     PHYRDS: 9810,
-//     PHYWRTS: 261,
-//     READTIM: 5053,
-//     WRITETIM: 5
-//   },
-//   {
-//     file_name: "3",
-//     PHYRDS: 32,
-//     PHYWRTS: 659,
-//     READTIM: 31,
-//     WRITETIM: 174
-//   },
-//   { file_name: "4", PHYRDS: 8, PHYWRTS: 2, READTIM: 0, WRITETIM: 0 },
-//   { file_name: "5", PHYRDS: 20, PHYWRTS: 2, READTIM: 1, WRITETIM: 0 }
-// ]
-
-// const chartBuildPga=()=>{
-
-//   var row0 = responses.map(reponse => {
-//     return reponse.PHYRDS
-//     })
-    
-//     var row1 = responses.map(reponse => {
-//     return reponse.PHYWRTS
-//     })
-    
+var classChartPGa = null;
+var classChartSGa = null;
+var classChartFile = null;
+var classChartSys = null;
+var classChartHR = null;
+var classChartHRLC = null;
 
 
-//     var row2 = responses.map(reponse => {
-//     return reponse.READTIM
-//     })
-    
-
-
-    
-//     var row3 = responses.map(reponse => {
-//     return reponse.WRITETIM
-//     })
-    
-  
-//     const dataset = responses.map(reponse => {
-//     console.log(reponse)
-//     return reponse.file_name
-    
-//     })
-//     const myData = [{
-//     data: row0,
-//     label: dataset[0],
-//     backgroundColor: 'rgba(64, 194, 147, 0.77)',
-//     borderWidth: 2
-//     }, {
-//     data: row1,
-//     label: dataset[1],
-//     backgroundColor: 'rgba(240, 148, 1, 1)',
-//     borderWidth: 2
-//     }, {
-//     data: row2,
-//     label: dataset[2],
-//     backgroundColor: 'rgba(187, 78, 76, 1)',
-//     borderWidth: 2
-//     }, 
-//     {
-//     data: row3,
-//     label: dataset[3],
-//     backgroundColor: 'rgba(187, 178, 76, 1)',
-//     borderWidth: 2
-//     }];
-    
-//     var modelBg = document.querySelector('.modal-bg')
-    
-//         modelBg.classList.add('bg-active')
-//         var ctx = document.getElementById('myChart').getContext('2d');
-//         var myChart = new Chart(ctx, {
-//             type: 'bar',
-//             data: {
-//                 labels: dataset,
-//                 datasets: myData
-//             },
-//             options: {
-//               responsive: true,
-            
-//               scales: {
-             
-                
-//                 y: {
-                    
-//                   min: 0,
-//                   max: 1000,
-//                   ticks: {
-                    
-//                     stepSize: 100
-//                   }
-//                 }
-//               }
-//             }
-//         });
-   
-// }
-
-
-// const responses = [
-//   {
-//     stat: 0,
-//     NAME: 'OS CPU Qt wait time',
-//     CLASS: 1,
-//     VALUE: 0
-//   },
-//   {
-//     stat: 1,
-//     NAME: 'logons cumulative',
-//     CLASS: 1,
-//     VALUE: 1206,
-//   },
-//   {
-//     stat: 2,
-//     NAME: 'logons current',
-//     CLASS: 1,
-//     VALUE: 33,
-//   },
-//   {
-//     stat: 3,
-//     NAME: 'opened cursors cumulative',
-//     CLASS: 1,
-//     VALUE: 228815
-//       },
-//   {
-//     stat: 4,
-//     NAME: 'opened cursors current',
-//     CLASS: 1,
-//     VALUE: 127
-//   },
-//   {
-//     stat: 5,
-//     NAME: 'user commits',
-//     CLASS: 1,
-//     VALUE: 3466
-//   },
-//   {
-//     stat: 6,
-//     NAME: 'user rollbacks',
-//     CLASS: 1,
-//     VALUE: 88
-//   },
-//   {
-//     stat: 7,
-//     NAME: 'user calls',
-//     CLASS: 1,
-//     VALUE: 42173
-//   },
-//   {
-//     stat: 8,
-//     NAME: 'recursive calls',
-//     CLASS: 1,
-//     VALUE: 1539141
-//   },
-//   {
-//     stat: 9,
-//     NAME: 'recursive cpu usage',
-//     CLASS: 1,
-//     VALUE: 15396
-//   }
-// ]
-
-
-// const responses = [
-//   {
-//     stat: 0,
-//     NAME: 'OS CPU Qt wait time',
-//     CLASS: 1,
-//     VALUE: 0
-//   },
-//   {
-//     stat: 1,
-//     NAME: 'logons cumulative',
-//     CLASS: 1,
-//     VALUE: 1206,
-//   },
-//   {
-//     stat: 2,
-//     NAME: 'logons current',
-//     CLASS: 1,
-//     VALUE: 33,
-//   },
-//   {
-//     stat: 3,
-//     NAME: 'opened cursors cumulative',
-//     CLASS: 1,
-//     VALUE: 228815
-//       },
-//   {
-//     stat: 4,
-//     NAME: 'opened cursors current',
-//     CLASS: 1,
-//     VALUE: 127
-//   },
-//   {
-//     stat: 5,
-//     NAME: 'user commits',
-//     CLASS: 1,
-//     VALUE: 3466
-//   },
-//   {
-//     stat: 6,
-//     NAME: 'user rollbacks',
-//     CLASS: 1,
-//     VALUE: 88
-//   },
-//   {
-//     stat: 7,
-//     NAME: 'user calls',
-//     CLASS: 1,
-//     VALUE: 42173
-//   },
-//   {
-//     stat: 8,
-//     NAME: 'recursive calls',
-//     CLASS: 1,
-//     VALUE: 1539141
-//   },
-//   {
-//     stat: 9,
-//     NAME: 'recursive cpu usage',
-//     CLASS: 1,
-//     VALUE: 15396
-//   }
-// ]
-
-// const myData = responses.map(response => response.VALUE)
-
-
-// const labels = responses.map(response => response.NAME);
-// const class1 = responses.map(response => response.CLASS);
-// const data = {
-// labels: labels,
-
-// datasets: [{
-//   label: 'PGA Chart',
-//   data: myData,
-//   fill: false,
-//   borderColor: 'rgb(75, 192, 192)',
-//   tension: 0.1,
-
-// }]
-// };
-
-// function tableCreate() {
-//   let table = document.createElement('table');
-// let thead = document.createElement('thead');
-// let tbody = document.createElement('tbody');
-
-// table.appendChild(thead);
-// table.appendChild(tbody);
-
-// // Adding the entire table to the body tag
-// document.getElementById('body').appendChild(table);
-// let row_1 = document.createElement('tr');
-// let heading_1 = document.createElement('th');
-// heading_1.innerHTML = "Sr. No.";
-// let heading_2 = document.createElement('th');
-// heading_2.innerHTML = "Name";
-// let heading_3 = document.createElement('th');
-// heading_3.innerHTML = "Company";
-
-// row_1.appendChild(heading_1);
-// row_1.appendChild(heading_2);
-// row_1.appendChild(heading_3);
-// thead.appendChild(row_1);
-
-
-// // Creating and adding data to second row of the table
-// let row_2 = document.createElement('tr');
-// let row_2_data_1 = document.createElement('td');
-// row_2_data_1.innerHTML = "1.";
-// let row_2_data_2 = document.createElement('td');
-// row_2_data_2.innerHTML = "James Clerk";
-// let row_2_data_3 = document.createElement('td');
-// row_2_data_3.innerHTML = "Netflix";
-
-// row_2.appendChild(row_2_data_1);
-// row_2.appendChild(row_2_data_2);
-// row_2.appendChild(row_2_data_3);
-// tbody.appendChild(row_2);
-
-
-// // Creating and adding data to third row of the table
-// let row_3 = document.createElement('tr');
-// let row_3_data_1 = document.createElement('td');
-// row_3_data_1.innerHTML = "2.";
-// let row_3_data_2 = document.createElement('td');
-// row_3_data_2.innerHTML = "Adam White";
-// let row_3_data_3 = document.createElement('td');
-// row_3_data_3.innerHTML = "Microsoft";
-
-// row_3.appendChild(row_3_data_1);
-// row_3.appendChild(row_3_data_2);
-// row_3.appendChild(row_3_data_3);
-// tbody.appendChild(row_3);
-// }
-
-// const buildSgaChart = ()=>{
-//   var modelBg = document.querySelector('.modal-bg')
-    
-//           modelBg.classList.add('bg-active')
-//           var ctx = document.getElementById('myChart').getContext('2d');
-//   new Chart(ctx, {
-//     type: 'line',
-//     data: {
-//       labels: labels,
-//       datasets: [{
-//         label: 'PGA Chart',
-//         data: myData,
-//         fill: false,
-//         borderColor: 'rgb(75, 192, 192)',
-//         tension: 0.1,
-      
-//       }]
-//     },
-//     options: {
-//       title: {
-//         display: true,
-//         text: 'World population per region (in millions)'
-//       }
-//     }
-//   });
-// }
 
 const responses = [
   {
@@ -864,4 +417,552 @@ var ourClass =""
   tableCreate()
 
 }
-          // }
+         
+
+          const responsesPGA = [
+            {
+              FILE_ID: 0,
+              PHYRDS: 0,
+              PHYWRTS: 0,
+              READTIM: 0,
+              WRITETIM: 0
+            },
+            {
+              FILE_ID: 0,
+              PHYRDS: 0,
+              PHYWRTS: 0,
+              READTIM: 0,
+              WRITETIM: 0
+            },
+            { FILE_ID: 0, PHYRDS: 0, PHYWRTS: 0, READTIM: 0, WRITETIM: 0 },
+            { FILE_ID: 0, PHYRDS: 0, PHYWRTS: 0, READTIM: 0, WRITETIM: 0 },
+            { FILE_ID: 0, PHYRDS: 0, PHYWRTS: 0, READTIM: 0, WRITETIM: 0 }
+          ]
+          
+          function sgaChart(responses,ctx){
+        
+            
+            const myData = responses.map(response => response.VALUE)
+          
+          
+            const labels = responses.map(response => response.NAME);
+            const class1 = responses.map(response => response.CLASS);
+          const data = {
+            labels: labels,
+            
+            datasets: [{
+              label: 'SGA Chart',
+              data: myData,
+              fill: false,
+              borderColor: 'rgb(77, 226, 201)',
+              backgroundColor: 'rgb(77, 226, 201)',
+              tension: 0.1,
+              options:{
+                  plugins:{
+                      tooltip:{
+                          events:['hover'],
+                          text:class1
+                      }
+                  }
+              }
+            }]
+          };
+          
+          if(classChartSGa === null){
+            classChartSGa = new Chart(ctx, {
+              type: 'bar',
+              data: data
+            });
+          }else{
+            classChartSGa.destroy();
+            classChartSGa = new Chart(ctx, {
+              type: 'bar',
+              data: data
+            });
+
+          }
+          
+        
+        }  
+       
+        
+       
+        
+        function chartBuildPga(responses,ctx){
+
+          var row0 = responses.map(reponse => {
+            return reponse.PHYRDS
+            })
+            
+            var row1 = responses.map(reponse => {
+            return reponse.PHYWRTS
+            })
+            
+            var row2 = responses.map(reponse => {
+            return reponse.READTIM
+            })
+            
+            
+            var row3 = responses.map(reponse => {
+            return reponse.WRITETIM
+            })
+            
+          
+            const dataset = responses.map(reponse => {
+            console.log(reponse)
+            return reponse.FILE_ID
+            
+            })
+            const myData = [{
+            data: row0,
+            label: dataset[0],
+            backgroundColor: 'rgba(64, 194, 147, 0.77)',
+            borderWidth: 2
+            }, {
+            data: row1,
+            label: dataset[1],
+            backgroundColor: 'rgba(240, 148, 1, 1)',
+            borderWidth: 2
+            }, {
+            data: row2,
+            label: dataset[2],
+            backgroundColor: 'rgba(187, 78, 76, 1)',
+            borderWidth: 2
+            }, 
+            {
+            data: row3,
+            label: dataset[2],
+            backgroundColor: 'rgba(187, 178, 76, 1)',
+            borderWidth: 2
+            }]
+            if(classChartPGa === null){
+              classChartPGa = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: dataset,
+                    datasets: myData
+                },
+            });
+            }else{
+              classChartPGa.destroy();
+              classChartPGa = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: dataset,
+                    datasets: myData
+                },
+            });
+           
+  
+            }
+               
+           
+        }
+        
+        
+        var ctxPga = document.getElementById('PGAChart').getContext('2d');
+        chartBuildPga(responsesPGA,ctxPga)
+        
+        
+        function fileChart(responses,ctx){
+        
+          
+            var row0 = responses.map(reponse => {
+            return reponse.CURRENT_SIZE
+            })
+            
+            var row1 = responses.map(reponse => {
+            return reponse.MIN_SIZE
+            })
+            
+            var row2 = responses.map(reponse => {
+            return reponse.MAX_SIZE
+            })
+            
+            var obj = {};
+            var dt = [];
+            var backgroundColor = {};
+            var label = {}
+            
+            
+            
+            const dataset = responses.map(reponse => {
+            console.log(reponse)
+            return reponse.COMPONENT
+            })
+            
+            const myData = [{
+            data: row0,
+            label: dataset[0],
+            backgroundColor: 'rgba(64, 194, 147, 0.77)',
+            borderWidth: 2
+            }, {
+            data: row1,
+            label: dataset[1],
+            backgroundColor: 'rgba(240, 148, 1, 1)',
+            borderWidth: 2
+            }, {
+            data: row2,
+            label: dataset[2],
+            backgroundColor: 'rgba(187, 78, 76, 1)',
+            borderWidth: 2
+            }]
+           
+            if(classChartFile === null){
+              classChartFile = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: dataset,
+                    datasets: myData
+                },
+            });
+            }else{
+              classChartFile.destroy();
+              classChartFile = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: dataset,
+                    datasets: myData
+                },
+            });
+  
+            }
+                
+          }
+          var ctxFileChart = document.getElementById('FileChart').getContext('2d');
+
+          const responsesFileChart = [{
+            COMPONENT: '',
+            CURRENT_SIZE: 0,
+            MIN_SIZE: 0,
+            MAX_SIZE: 0
+          },
+          {
+            COMPONENT: '',
+            CURRENT_SIZE: 0,
+            MIN_SIZE: 0,
+            MAX_SIZE: 0
+          },
+          {
+            COMPONENT: '',
+            CURRENT_SIZE: 0,
+            MIN_SIZE: 0,
+            MAX_SIZE: 0
+          },
+          {
+            COMPONENT: '',
+            CURRENT_SIZE: 0,
+            MIN_SIZE: 0,
+            MAX_SIZE: 0
+          },
+          {
+            COMPONENT: '',
+            CURRENT_SIZE: 0,
+            MIN_SIZE: 0,
+            MAX_SIZE: 0
+          },
+          {
+            COMPONENT: '',
+            CURRENT_SIZE: 0,
+            MIN_SIZE: 0,
+            MAX_SIZE: 0
+          }
+          ]
+        
+        
+          fileChart(responsesFileChart,ctxFileChart)
+        
+        
+        
+        
+        
+           function ratioChart(ratio,ctx){
+            const myDate =   [ratio,100-ratio]
+     
+        
+          const data = {
+            labels: [
+              'Hit ratio',
+              'Free'
+            ],
+            datasets: [{
+              label: 'My First Dataset',
+              data: myDate,
+              
+              backgroundColor: [
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)'
+              ],
+              hoverOffset: 4
+            }]
+          };
+        
+        
+          if(classChartHR === null){
+            classChartHR = new Chart(ctx, {
+            
+              type: 'doughnut',
+              data: data,
+            
+      });
+          }else{
+            classChartHR.destroy();
+            classChartHR = new Chart(ctx, {
+            
+              type: 'doughnut',
+              data: data,
+            
+      });
+
+          }
+          
+
+        }
+        
+        var ctxHitRatio = document.getElementById('HitRatioChart').getContext('2d');
+        
+        var responseHitRation = 0
+        ratioChart(responseHitRation,ctxHitRatio)
+        
+        
+        
+        
+        
+        
+        
+        
+        
+         function ratioChartLibraryCash(ratio,ctx){
+            const myDate =   [ratio,100-ratio] 
+        
+          const data = {
+            labels: [
+              'Hit ratio',
+              'Free'
+            ],
+            datasets: [{
+              label: 'My First Dataset',
+              data: myDate,
+              
+              backgroundColor: [
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)'
+              ],
+              hoverOffset: 4
+            }]
+          };
+        
+          if(classChartHRLC === null){
+            classChartHRLC = new Chart(ctx, {
+            
+              type: 'doughnut',
+              data: data,
+            
+      });
+          }else{
+            classChartHRLC.destroy();
+            classChartHRLC = new Chart(ctx, {
+            
+              type: 'doughnut',
+              data: data,
+            
+      });
+
+          }
+        
+        }
+        
+        var ctxHitRatioChartLibraryCash = document.getElementById('HitRatioChartLibraryCash').getContext('2d');
+        var responseHitRationLibraryCash = 0
+        ratioChartLibraryCash(responseHitRationLibraryCash,ctxHitRatioChartLibraryCash)
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        // function sgaChart(responses,ctx){
+        
+            
+        //     const myData = responses.map(response => response.VALUE)
+          
+          
+        //     const labels = responses.map(response => response.NAME);
+        //     const class1 = responses.map(response => response.CLASS);
+        //   const data = {
+        //     labels: labels,
+            
+        //     datasets: [{
+        //       label: 'PGA Chart',
+        //       data: myData,
+        //       fill: false,
+        //       borderColor: 'rgb(77, 226, 201)',
+        //       backgroundColor: 'rgb(77, 226, 201)',
+        //       tension: 0.1,
+        //       options:{
+        //           plugins:{
+        //               tooltip:{
+        //                   events:['hover'],
+        //                   text:class1
+        //               }
+        //           }
+        //       }
+        //     }]
+        //   };
+        
+        //   var myChart = new Chart(ctx, {
+        //     type: 'bar',
+        //     data: data
+        //   });
+        // }
+        var ctxSGA = document.getElementById('SGAChart').getContext('2d');
+        
+        const responsesSGA = [
+            {
+              stat: 0,
+              NAME: '',
+              CLASS: 0,
+              VALUE: 0
+            },
+            {
+              stat: 0,
+              NAME: '',
+              CLASS: 0,
+              VALUE: 0,
+            },
+            {
+              stat: 0,
+              NAME: '',
+              CLASS: 0,
+              VALUE: 0,
+            },
+            {
+              stat: 0,
+              NAME: '',
+              CLASS: 0,
+              VALUE: 0
+                },
+            {
+              stat: 0,
+              NAME: '',
+              CLASS: 0,
+              VALUE: 0
+            },
+            {
+              stat: 0,
+              NAME: '',
+              CLASS: 0,
+              VALUE: 0
+            },
+            {
+              stat: 0,
+              NAME: '',
+              CLASS: 0,
+              VALUE: 0,
+            },
+            {
+              stat: 0,
+              NAME: '',
+              CLASS: 0,
+              VALUE: 0
+            },
+            {
+              stat: 0,
+              NAME: '',
+              CLASS: 0,
+              VALUE: 0
+            },
+            {
+              stat: 0,
+              NAME: '',
+              CLASS: 0,
+              VALUE: 0
+            }
+          ]
+          
+        
+        
+         sgaChart(responsesSGA,ctxSGA);
+        
+        
+        
+        function sysStatChart(responses,ctx){
+        
+            const myData = responses.map(response => response.VALUE)
+          
+          
+            const labels = responses.map(response => response.NAME);
+            const class1 = responses.map(response => response.CLASS);
+          const data = {
+            labels: labels,
+            
+            datasets: [{
+              label: 'PGA Chart',
+              data: myData,
+              fill: false,
+              borderColor: 'rgb(75, 192, 192)',
+              tension: 0.1,
+          
+            }]
+          };
+          
+          if(classChartSys === null){
+            classChartSys =    new Chart(ctx, {
+              type: 'line',
+              data: data,
+              options: {
+                title: {
+                  display: true,
+                  text: 'World population per region (in millions)'
+                }
+              }
+            });
+          }else{
+            classChartSys.destroy();
+            classChartSys = new Chart(ctx, {
+              type: 'line',
+              data: data,
+              options: {
+                title: {
+                  display: true,
+                  text: 'World population per region (in millions)'
+                }
+              }
+            });
+
+          }
+          
+           
+            }
+            var ctxSysStat = document.getElementById('SysStatChart').getContext('2d');
+            const responseSysStat = [
+                {
+                  stat: 0,
+                  NAME: '',
+                  CLASS: 0,
+                  VALUE: 0
+                }
+              ]
+              
+        
+            sysStatChart(responseSysStat,ctxSysStat)
+        
+        
+            
+var responseCredentials = 
+  {
+    INSTANCE_NAME: '',
+    HOST_NAME: '',
+    VERSION: '',
+    DATABASE_STATUS: ''
+  }
+
+  function setCredentials(response){
+    document.getElementById('instance_name').innerHTML="INSTANCE NAME:   "+response.INSTANCE_NAME;
+    document.getElementById('host_name').innerHTML="HOST NAME:   "+response.HOST_NAME;
+    document.getElementById('version').innerHTML="VERSION:   "+response.VERSION;
+    document.getElementById('database_status').innerHTML="DATABASE STATUS:   "+response.DATABASE_STATUS;
+  }
